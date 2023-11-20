@@ -5,6 +5,7 @@ using UnityEngine;
 public class DoorController : MonoBehaviour
 {
     public GameObject[] linkedButtions;
+    public bool reverse = false;
     private int counter = 0;
 
     private void Update()
@@ -23,7 +24,18 @@ public class DoorController : MonoBehaviour
                 // If all full
                 if (counter == linkedButtions.Length)
                 {
-                    this.gameObject.SetActive(false);
+                    if (!reverse)
+                    {
+                        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
+                        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+                    }
+                    else
+                    {
+                        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
+                        this.gameObject.GetComponent<BoxCollider>().enabled = true;
+                    }
+
+                    this.gameObject.GetComponent<DoorController>().enabled = false;
                 }
             }
             // Else end function
