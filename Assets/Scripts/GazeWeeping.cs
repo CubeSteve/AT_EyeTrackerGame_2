@@ -20,7 +20,7 @@ public class GazeWeeping : GazeObject
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (gazeAware.HasGazeFocus)
         {
