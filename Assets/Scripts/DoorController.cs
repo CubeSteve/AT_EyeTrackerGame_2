@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DoorController : MonoBehaviour
@@ -24,15 +25,19 @@ public class DoorController : MonoBehaviour
                 // If all full
                 if (counter == linkedButtions.Length)
                 {
-                    if (!reverse)
+                    if (this.gameObject.GetComponent<MeshRenderer>() != null)
                     {
-                        this.gameObject.GetComponent<MeshRenderer>().enabled = false;
-                        this.gameObject.GetComponent<BoxCollider>().enabled = false;
+                        this.gameObject.GetComponent<MeshRenderer>().enabled = reverse;
                     }
-                    else
+
+                    if (this.gameObject.GetComponent<BoxCollider>() != null)
                     {
-                        this.gameObject.GetComponent<MeshRenderer>().enabled = true;
-                        this.gameObject.GetComponent<BoxCollider>().enabled = true;
+                        this.gameObject.GetComponent<BoxCollider>().enabled = reverse;
+                    }
+
+                    if (this.gameObject.GetComponent<TextMeshProUGUI>() != null)
+                    {
+                        this.gameObject.GetComponent<TextMeshProUGUI>().enabled = reverse;
                     }
 
                     this.gameObject.GetComponent<DoorController>().enabled = false;

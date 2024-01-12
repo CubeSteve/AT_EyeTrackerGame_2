@@ -10,6 +10,8 @@ public class GazeWeeping : GazeObject
     private GameObject player;
     public GameObject linkedDoor;
     private bool isAlive = false;
+    public Transform playerResetPosition;
+    public Transform selfResetPosition;
 
     void Start()
     {
@@ -36,6 +38,18 @@ public class GazeWeeping : GazeObject
         if (isAlive)
         {
             agent.SetDestination(player.transform.position);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            other.GetComponent<CharacterController>().enabled = false;
+            other.transform.position = playerResetPosition.transform.position;
+            other.GetComponent<CharacterController>().enabled = true;
+
+            transform.position = selfResetPosition.transform.position;
         }
     }
 }
